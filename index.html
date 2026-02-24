@@ -75,7 +75,7 @@
       "stupid": "kuku",
       "pig": "keke",
       "dog": "keke",
-      "good": "gruh",
+      "good": "cool",
       "a": "kres",
       "to": "vreh",
       "much": "krek",
@@ -117,17 +117,39 @@
       "rayyan":"Es",
       "denzel":"Hris",
       "kanezka":"Krus"
+      "and":"drun",
+      "why":"vren",
+      "what":"kav",
+      "who":"hurn",
+      "when":"zen",
+      "where":"vrok",
+      "strict":"srusik",
+      "because":"dravas",
+      "run":"drak",
+      "eat":"muk",
+      "go":"vra",
+      "see":"lok",
+      "make":"kriv",
+      "have":"sen",
+      "say":"vok",
+      "yes":"yus",
+      "nintendo":"Nunsikdo"
+
+
 
 
 
     };
 
-    function translateToFokus() {
-      const input = document.getElementById("englishInput").value.toLowerCase();
-      const words = input.split(/\s+/);
-      const translated = words.map(word => dictionary[word] || word).join(" ");
-      document.getElementById("fokusOutput").value = translated;
-    }
+function translate(text) {
+  const tokens = text.match(/\w+|[^\w\s]/g) || [];
+  const translated = tokens.map(token => {
+    const lower = token.toLowerCase(); 
+    return dictionary[lower] || token;    
+  });
+  return translated.join(" ");
+}
+
   </script>
 </body>
 </html>
