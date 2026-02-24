@@ -144,12 +144,18 @@
 function translate(text) {
   const tokens = text.match(/\w+|[^\w\s]/g) || [];
   const translated = tokens.map(token => {
-    const lower = token.toLowerCase(); 
-    return dictionary[lower] || token;    
+    const lower = token.toLowerCase();
+    return dictionary[lower] || token;
   });
   return translated.join(" ");
 }
 
-  </script>
+function translateToFokus() {
+  const input = document.getElementById("englishInput").value;
+  const output = translate(input);
+  document.getElementById("fokusOutput").value = output;
+}
+</script>
+
 </body>
 </html>
