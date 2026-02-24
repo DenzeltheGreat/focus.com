@@ -66,7 +66,8 @@
       <textarea id="fokusOutput" readonly placeholder="Translation appears here..."></textarea>
     </div>
   </div>
- <a href="https://nofocus.com">Visit NoFocus</a>
+  <a href="https://nofocus.com">Visit NoFocus</a>
+
   <script>
     const dictionary = {
       "is": "tas",
@@ -98,64 +99,58 @@
       "yall": "sup",
       "better": "sius",
       "worser": "suis",
-      "hello" : "Hais",
+      "hello": "Hais",
       "bye": "Urs",
       "rayhan": "Urkurk",
-      "eldrich":"Krukru",
+      "eldrich": "Krukru",
       "alif": "Kurkur",
       "like": "lis",
       "no": "nos",
-      "not":"nris",
-      "hate":"hiss",
-      "coming":"cus",
+      "not": "nris",
+      "hate": "hiss",
+      "coming": "cus",
       "fix": "ficks",
-      "this":"tus",
-      "guy":"rash",
-      "one":"bem",
-      "two":"bum",
-      "sheep":"drus",
-      "rayyan":"Es",
-      "denzel":"Hris",
-      "kanezka":"Krus",
-      "and":"drun",
-      "why":"vren",
-      "what":"kav",
-      "who":"hurn",
-      "when":"zen",
-      "where":"vrok",
-      "strict":"srusik",
-      "because":"dravas",
-      "run":"drak",
-      "eat":"muk",
-      "go":"vra",
-      "see":"lok",
-      "make":"kriv",
-      "have":"sen",
-      "say":"vok",
-      "yes":"yus",
-      "nintendo":"Nunsikdo"
-
-
-
-
-
+      "this": "tus",
+      "guy": "rash",
+      "one": "bem",
+      "two": "bum",
+      "sheep": "drus",
+      "rayyan": "Es",
+      "denzel": "Hris",
+      "kanezka": "Krus",
+      "and": "drun",
+      "why": "vren",
+      "what": "kav",
+      "who": "hurn",
+      "when": "zen",
+      "where": "vrok",
+      "strict": "srusik",
+      "because": "dravas",
+      "run": "drak",
+      "eat": "muk",
+      "go": "vra",
+      "see": "lok",
+      "make": "kriv",
+      "have": "sen",
+      "say": "vok",
+      "yes": "yus",
+      "nintendo": "Nunsikdo"
     };
 
-function translate(text) {
-  const tokens = text.match(/\w+|[^\w\s]/g) || [];
-  const translated = tokens.map(token => {
-    const lower = token.toLowerCase();
-    return dictionary[lower] || token;
-  });
-  return translated.join(" ");
-}
+    function translate(text) {
+      const tokens = text.match(/\w+|[^\w\s]/g) || [];
+      const translated = tokens.map(token => {
+        const lower = token.toLowerCase();
+        return dictionary[lower] || token;
+      });
+      return translated.join(" ");
+    }
 
-function translateToFokus() {
-  const input = document.getElementById("englishInput").value;
-  const output = translate(input);
-  document.getElementById("fokusOutput").value = output;
-}
-</script>
-
+    function translateToFokus() {
+      const input = document.getElementById("englishInput").value;
+      const output = translate(input);
+      document.getElementById("fokusOutput").value = output;
+    }
+  </script>
 </body>
 </html>
