@@ -81,8 +81,8 @@
       <button onclick="translateToFokus()">Translate →</button>
     </div>
     <div class="box">
-      <h3>Fokus Language</h3>
-      <textarea id="fokusOutput" placeholder="Type Fokus here..."></textarea>
+      <h3>AntiFokus Language</h3>
+      <textarea id="fokusOutput" placeholder="Type AntiFokus here..."></textarea>
       <button onclick="translateToEnglish()">Translate ←</button>
     </div>
   </div>
@@ -227,6 +227,9 @@
       const fixed = grammarFix(raw);
       document.getElementById("englishInput").value = fixed;
     }
+     document.getElementById("englishInput").addEventListener("input", translateToFokus);
+    document.getElementById("fokusOutput").addEventListener("input", translateToEnglish);
+
   </script>
 </body>
 </html>
