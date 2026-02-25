@@ -129,7 +129,6 @@
       "because": "dravas",
       "run": "drak",
       "eat": "muk",
-      "go": "vra",
       "see": "lok",
       "make": "kriv",
       "have": "sen",
@@ -137,9 +136,11 @@
       "yes": "yus",
       "nintendo": "Nunsikdo"
     };
+
+    // Build reverse dictionary automatically
     const reverseDictionary = {};
-    for (const [eng, fokus] of Object.entries(dictionary)) {
-      reverseDictionary[fokus.toLowerCase()] = eng;
+    for (const [english, fokus] of Object.entries(dictionary)) {
+      reverseDictionary[fokus.toLowerCase()] = english;
     }
 
     function translate(text) {
@@ -167,6 +168,8 @@
       const input = document.getElementById("fokusOutput").value;
       document.getElementById("englishInput").value = reverseTranslate(input);
     }
+
+    // Auto-translate as you type
     document.getElementById("englishInput").addEventListener("input", translateToFokus);
     document.getElementById("fokusOutput").addEventListener("input", translateToEnglish);
   </script>
