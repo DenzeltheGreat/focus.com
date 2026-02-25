@@ -97,7 +97,7 @@ const dictionary = {
   "nincompoop": "bruk",
   "stupid": "kuku",
   "pig": "keke",
-  "dog": "keke",
+  "dog": "krekre",
   "good": "druk",
   "a": "kres",
   "to": "vreh",
@@ -183,48 +183,185 @@ const dictionary = {
   "enemy": "moruk",
   "power": "dravos",
   "king": "valdrin",
-  "queen": "valdra"
+  "queen": "valdra",
+  "or": "vor",
+  "although": "kravas",
+  "if": "vrek",
+  "while": "zurn",
+  "before": "pren",
+  "after": "zren",
+  "until": "drent",
+  "be": "zor",
+  "do": "vrosk",
+  "take": "dravk",
+  "give": "morsk",
+  "know": "krav",
+  "think": "zethar",
+  "want": "vash",
+  "need": "drash",
+  "build": "kravar",
+  "create": "zarkiv",
+  "destroy": "morvak",
+  "strong": "dravik",
+  "weak": "vrinik",
+  "fast": "zark",
+  "slow": "murn",
+  "big": "drum",
+  "small": "krin",
+  "beautiful": "zelra",
+  "ugly": "morra",
+  "new": "zena",
+  "old": "vrana",
+  "happy": "zuna",
+  "sad": "vrina",
+  "woman": "valra",
+  "child": "brun",
+  "friend": "mav",
+  "family": "druna",
+  "home": "kraven",
+  "school": "krimtal",
+  "teacher": "vorsk",
+  "student": "kravik",
+  "world": "zoren",
+  "time": "draken",
+  "war": "morvak",
+  "peace": "valen",
+  "truth": "zareth",
+  "lie": "morik",
+  "always": "dravan",
+  "never": "vrakan",
+  "often": "zuren",
+  "sometimes": "moren",
+  "now": "zenka",
+  "yesterday": "vorsh",
+  "today": "zenka",
+  "tomorrow": "draka",
+  "here": "vrokal",
+  "there": "morokal",
+  "in": "ven",
+  "on": "prenik",
+  "at": "vrenik",
+  "from": "murnik",
+  "with": "drunik",
+  "without": "vrunik",
+  "under": "krunik",
+  "over": "zrunik",
+  "into": "vrentik",
+  "through": "draventik",
+  "which": "kravik",
+  "three": "zrum",
+  "four": "krum",
+  "five": "dravum",
+  "many": "mrav",
+  "few": "vrim",
+  "all": "draval",
+  "some": "moril",
+  "every": "zarel",
+  "none": "vranel",
+  "love": "luma",
+  "hate": "hatax",
+  "cool": "coro",
+  "nice": "nara",
+  "fun": "funa",
+  "boring": "bora",
+  "smart": "soma",
+  "strong": "stro",
+  "weak": "wema",
+  "tired": "tira",
+  "hungry": "huna",
+  "sleep": "nina",
+  "dream": "dora",
+  "play": "pala",
+  "work": "woka",
+  "read": "reda",
+  "write": "rita",
+  "listen": "lisa",
+  "talk": "toka",
+  "walk": "waka",
+  "sit": "sita",
+  "stand": "stana",
+  "open": "opra",
+  "close": "closa",
+  "light": "lita",
+  "dark": "dara",
+  "fire": "fira",
+  "water": "wata",
+  "earth": "tera",
+  "wind": "wina",
+  "day": "dina",
+  "night": "nita",
+  "sun": "suna",
+  "moon": "munae",
+  "star": "stara",
+  "life": "lifa",
+  "death": "detha",
+  "heart": "harta",
+  "mind": "minda"
 };
 
+// Reverse dictionary
 const reverseDictionary = {};
 for (const [eng, fok] of Object.entries(dictionary)) {
   reverseDictionary[fok.toLowerCase()] = eng;
 }
 
+// Tokenizer
 function tokenize(text){
   return text.match(/\w+|\s+|[^\w\s]/g) || [];
 }
 
+// Auto generator (kalau kata tidak ada di dictionary)
+function autoGenerate(word){
+  let w = word.toLowerCase();
+
+  // kalau ada di dictionary
+  if(dictionary[w]) return dictionary[w];
+
+  // plural
+  if(w.endsWith("s") && w.length > 3){
+    return w.slice(0,-1) + "sik";
+  }
+
+  // verb -ing
+  if(w.endsWith("ing")){
+    return w.slice(0,-3) + "o";
+  }
+
+  // past tense
+  if(w.endsWith("ed")){
+    return w.slice(0,-2) + "edr";
+  }
+
+  // default
+  return w + "a";
+}
+
+// Translate (English → Fokus)
 function translate(text){
   return tokenize(text)
-    .map(t => dictionary[t.toLowerCase()] || t)
+    .map(t => {
+      let w = t.toLowerCase();
+
+      // kalau ada di dictionary
+      if(dictionary[w]) return dictionary[w];
+
+      // kalau bukan huruf (spasi/tanda baca)
+      if(!/^[a-z]+$/i.test(t)) return t;
+
+      // generate
+      return autoGenerate(w);
+    })
     .join("");
 }
 
+// Reverse (Fokus → English)
 function reverseTranslate(text){
   return tokenize(text)
     .map(t => reverseDictionary[t.toLowerCase()] || t)
     .join("");
 }
 
-function grammarFix(sentence){
-  let words = sentence.split(" ");
-  for(let i=0;i<words.length-1;i++){
-    if(["he","she","it"].includes(words[i].toLowerCase())
-       && words[i+1].toLowerCase()==="hate"){
-      words[i+1]="hates";
-    }
-    if(words[i].toLowerCase()==="a"
-       && /^[aeiou]/i.test(words[i+1])){
-      words[i]="an";
-    }
-  }
-  if(words.length>0){
-    words[0]=words[0].charAt(0).toUpperCase()+words[0].slice(1);
-  }
-  return words.join(" ");
-}
-
+// Event system
 let lock = false;
 
 const englishInput = document.getElementById("englishInput");
@@ -240,11 +377,8 @@ englishInput.addEventListener("input", function(){
 fokusOutput.addEventListener("input", function(){
   if(lock) return;
   lock = true;
-  const raw = reverseTranslate(this.value);
-  englishInput.value = grammarFix(raw);
+  englishInput.value = reverseTranslate(this.value);
   lock = false;
-});
-
 });
 
 </script>
@@ -252,4 +386,5 @@ fokusOutput.addEventListener("input", function(){
 </body>
 
 </html>
+
 
