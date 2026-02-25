@@ -1,262 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Fokus Translate</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-      background: linear-gradient(135deg, #ece9e6, #ffffff);
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    header {
-      background: linear-gradient(90deg, #4facfe, #00f2fe);
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 1.8em;
-      font-weight: bold;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-    .container {
-      display: flex;
-      justify-content: center;
-      margin: 40px auto;
-      gap: 30px;
-      max-width: 1000px;
-    }
-    .box {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      width: 45%;
-      padding: 25px;
-    }
-    h3 {
-      margin-top: 0;
-      font-size: 1.2em;
-      color: #4facfe;
-      border-bottom: 2px solid #f0f0f0;
-      padding-bottom: 8px;
-    }
-    textarea {
-      width: 100%;
-      height: 160px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      resize: none;
-      font-size: 1em;
-      padding: 10px;
-    }
-    button {
-      background: linear-gradient(90deg, #4facfe, #00f2fe);
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      margin-top: 15px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1em;
-      font-weight: bold;
-    }
-    a {
-      display: block;
-      text-align: center;
-      margin: 20px auto;
-      color: #4facfe;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Fokus Translate</title>
+
+<style>
+body {
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background: linear-gradient(135deg, #ece9e6, #ffffff);
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+header {
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.8em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.container {
+  display: flex;
+  justify-content: center;
+  margin: 40px auto;
+  gap: 30px;
+  max-width: 1000px;
+}
+.box {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  width: 45%;
+  padding: 25px;
+}
+h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+  color: #4facfe;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 8px;
+}
+textarea {
+  width: 100%;
+  height: 180px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  resize: none;
+  font-size: 1em;
+  padding: 10px;
+}
+a {
+  display: block;
+  text-align: center;
+  margin: 20px auto;
+  color: #4facfe;
+  text-decoration: none;
+  font-weight: bold;
+}
+</style>
 </head>
+
 <body>
-  <header>Fokus Translate</header>
-  <div class="container">
-    <div class="box">
-      <h3>English</h3>
-      <textarea id="englishInput" placeholder="Type English here..."></textarea>
-      <button onclick="translateToFokus()">Translate →</button>
-    </div>
-    <div class="box">
-      <h3>AntiFokus Language</h3>
-      <textarea id="fokusOutput" placeholder="Type AntiFokus here..."></textarea>
-      <button onclick="translateToEnglish()">Translate ←</button>
-    </div>
+
+<header>Fokus Translate</header>
+
+<div class="container">
+  <div class="box">
+    <h3>English</h3>
+    <textarea id="englishInput" placeholder="Type English here..."></textarea>
   </div>
-  <a href="https://nofocus.com">Visit NoFocus</a>
 
-  <script>
-    const dictionary = {
-      "is": "tas",
-      "also": "bum",
-      "nincompoop": "bruk",
-      "stupid": "kuku",
-      "pig": "keke",
-      "dog": "keke",
-      "good": "druk",
-      "a": "kres",
-      "to": "vreh",
-      "much": "krek",
-      "fokus": "brusk",
-      "man": "munh",
-      "more": "mrusk",
-      "go": "gus",
-      "please": "bas",
-      "babies": "brums",
-      "baby": "brum",
-      "marry": "mas",
-      "will": "wrest",
-      "spam": "spres",
-      "i": "riss",
-      "you": "van",
-      "he": "hus",
-      "her": "heur",
-      "it": "sris",
-      "they": "thus",
-      "yall": "sup",
-      "better": "sius",
-      "worser": "suis",
-      "hello": "Hais",
-      "bye": "Urs",
-      "rayhan": "Urkurk",
-      "eldrich": "Krukru",
-      "alif": "Kurkur",
-      "like": "lis",
-      "no": "nos",
-      "not": "nris",
-      "hate": "hiss",
-      "coming": "cus",
-      "fix": "ficks",
-      "this": "tus",
-      "guy": "rash",
-      "one": "bem",
-      "two": "bum",
-      "sheep": "drus",
-      "rayyan": "Es",
-      "denzel": "Hris",
-      "kanezka": "Tu",
-      "and": "drun",
-      "why": "vren",
-      "what": "kav",
-      "who": "hurn",
-      "when": "zen",
-      "where": "vrok",
-      "strict": "srusik",
-      "because": "dravas",
-      "run": "drak",
-      "eat": "muk",
-      "see": "lok",
-      "make": "kriv",
-      "have": "sen",
-      "say": "vok",
-      "yes": "yus",
-      "nintendo": "Nunsikdo",
-      "but": "su",
-      "shit": "Sas",
-      "fuck": "fruil",
-      "sybau": "krausimp",
-      "hell": "vare",
-      "as": "sor",
-      "bad": "krak",
-      "epic": "teh",
-      "duck": "epics",
-      "that": "pak",
-      "the": "pim",
-      "gangga": "grango",
-      "muna": "mona lisa",
-      "laksmi": "air",
-      "saiba": "saiba momoi",
-      "arjuna": "ishowsiomay",
-      "roderich": "Rouxls Kaard",
-      "elena": "akinobi",
-      "green": "saruman widjaja",
-      "risma": "rizzler",
-      "ms": "kor",
-      "ruth": "perper",
-      "nay": "purpur",
-      "this": "turs",
-      "annoying" : "krau",
-      "so" : "vamp",
-      "very" : "drav",
-      "get" : "hars",
-      "how" : "berk",
-      "schnitzel" : "enok",
-      "top" : "krim",
-      "first": "bemt",
-      "second": "bumt",
-      "people": "purs"
-    };
+  <div class="box">
+    <h3>AntiFokus Language</h3>
+    <textarea id="fokusOutput" placeholder="Type AntiFokus here..."></textarea>
+  </div>
+</div>
 
-    const reverseDictionary = {};
-    for (const [english, fokus] of Object.entries(dictionary)) {
-      reverseDictionary[fokus.toLowerCase()] = english;
+<a href="https://nofocus.com" target="_blank">Visit NoFocus</a>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function() {
+
+const dictionary = {
+  "is": "tas",
+  "also": "bum",
+  "nincompoop": "bruk",
+  "stupid": "kuku",
+  "pig": "keke",
+  "dog": "keke",
+  "good": "druk",
+  "a": "kres",
+  "to": "vreh",
+  "much": "krek",
+  "fokus": "brusk",
+  "man": "munh",
+  "more": "mrusk",
+  "go": "gus",
+  "please": "bas",
+  "babies": "brums",
+  "baby": "brum",
+  "marry": "mas",
+  "will": "wrest",
+  "spam": "spres",
+  "i": "riss",
+  "you": "van",
+  "he": "hus",
+  "her": "heur",
+  "it": "sris",
+  "they": "thus",
+  "yall": "sup",
+  "better": "sius",
+  "worser": "suis",
+  "hello": "hais",
+  "bye": "urs",
+  "like": "lis",
+  "no": "nos",
+  "not": "nris",
+  "hate": "hiss",
+  "coming": "cus",
+  "fix": "ficks",
+  "this": "turs",
+  "guy": "rash",
+  "one": "bem",
+  "two": "bum",
+  "sheep": "drus",
+  "and": "drun",
+  "why": "vren",
+  "what": "kav",
+  "who": "hurn",
+  "when": "zen",
+  "where": "vrok",
+  "strict": "srusik",
+  "because": "dravas",
+  "run": "drak",
+  "eat": "muk",
+  "see": "lok",
+  "make": "kriv",
+  "have": "sen",
+  "say": "vok",
+  "yes": "yus",
+  "but": "su",
+  "hell": "vare",
+  "as": "sor",
+  "bad": "krak",
+  "epic": "teh",
+  "duck": "epics",
+  "that": "pak",
+  "the": "pim",
+  "annoying": "krau",
+  "so": "vamp",
+  "very": "drav",
+  "get": "hars",
+  "how": "berk",
+  "schnitzel": "enok",
+  "top": "krim",
+  "first": "bemt",
+  "second": "bumt",
+  "people": "purs"
+};
+
+const reverseDictionary = {};
+for (const [eng, fok] of Object.entries(dictionary)) {
+  reverseDictionary[fok.toLowerCase()] = eng;
+}
+
+function tokenize(text){
+  return text.match(/\w+|\s+|[^\w\s]/g) || [];
+}
+
+function translate(text){
+  return tokenize(text)
+    .map(t => dictionary[t.toLowerCase()] || t)
+    .join("");
+}
+
+function reverseTranslate(text){
+  return tokenize(text)
+    .map(t => reverseDictionary[t.toLowerCase()] || t)
+    .join("");
+}
+
+function grammarFix(sentence){
+  let words = sentence.split(" ");
+  for(let i=0;i<words.length-1;i++){
+    if(["he","she","it"].includes(words[i].toLowerCase())
+       && words[i+1].toLowerCase()==="hate"){
+      words[i+1]="hates";
     }
-
-    function tokenize(text) {
-      return text.match(/\w+|\s+|[^\w\s]/g) || [];
+    if(words[i].toLowerCase()==="a"
+       && /^[aeiou]/i.test(words[i+1])){
+      words[i]="an";
     }
+  }
+  if(words.length>0){
+    words[0]=words[0].charAt(0).toUpperCase()+words[0].slice(1);
+  }
+  return words.join(" ");
+}
 
-    function translate(text) {
-      const tokens = tokenize(text);
-      return tokens.map(token => dictionary[token.toLowerCase()] || token).join(" ");
-    }
+let lock = false;
 
-    function reverseTranslate(text) {
-      const tokens = tokenize(text);
-      return tokens.map(token => reverseDictionary[token.toLowerCase()] || token).join(" ");
-    }
+const englishInput = document.getElementById("englishInput");
+const fokusOutput = document.getElementById("fokusOutput");
 
-    function grammarFix(sentence) {
-      let words = sentence.split(" ");
-      for (let i = 0; i < words.length - 1; i++) {
-        if (["he","she","it"].includes(words[i].toLowerCase()) && words[i+1].toLowerCase() === "hate") {
-          words[i+1] = "hates";
-        }
-      }
-      for (let i = 0; i < words.length - 1; i++) {
-        if (words[i].toLowerCase() === "i" && !["am","have","will"].includes(words[i+1].toLowerCase())) {
-          words.splice(i+1, 0, "am");
-        }
-      }
-      for (let i = 0; i < words.length - 1; i++) {
-        if (words[i].toLowerCase() === "a" && /^[aeiou]/i.test(words[i+1])) {
-          words[i] = "an";
-        }
-      }
-      if (words.length > 0) {
-        words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
-      }
-      return words.join(" ");
-    }
+englishInput.addEventListener("input", function(){
+  if(lock) return;
+  lock = true;
+  fokusOutput.value = translate(this.value);
+  lock = false;
+});
 
-    function translateToFokus() {
-      const input = document.getElementById("englishInput").value;
-      const output = translate(input);
-      document.getElementById("fokusOutput").value = output;
-    }
+fokusOutput.addEventListener("input", function(){
+  if(lock) return;
+  lock = true;
+  const raw = reverseTranslate(this.value);
+  englishInput.value = grammarFix(raw);
+  lock = false;
+});
 
-    function translateToEnglish() {
-      const input = document.getElementById("fokusOutput").value;
-      const raw = reverseTranslate(input);
-      const fixed = grammarFix(raw);
-      document.getElementById("englishInput").value = fixed;
-    }
+});
 
-    // 🔑 Attach listeners only after DOM is ready
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("englishInput").addEventListener("input", translateToFokus);
-      document.getElementById("fokusOutput").addEventListener("input", translateToEnglish);
-    });
-  </script>
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
