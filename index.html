@@ -109,87 +109,91 @@
   <a href="https://nofocus.com">Visit NoFocus</a>
 
   <script>
-    const dictionary = {
-      "is": "tas",
-      "also": "bum",
-      "nincompoop": "bruk",
-      "stupid": "kuku",
-      "pig": "keke",
-      "dog": "keke",
-      "good": "druk",
-      "a": "kres",
-      "to": "vreh",
-      "much": "krek",
-      "fokus": "brusk",
-      "man": "munh",
-      "more": "mrusk",
-      "go": "gus",
-      "please": "bas",
-      "babies": "brums",
-      "baby": "brum",
-      "marry": "mas",
-      "will": "wrest",
-      "spam": "spres",
-      "i": "riss",
-      "you": "van",
-      "he": "hus",
-      "her": "heur",
-      "it": "sris",
-      "they": "thus",
-      "yall": "sup",
-      "better": "sius",
-      "worser": "suis",
-      "hello": "Hais",
-      "bye": "Urs",
-      "rayhan": "Urkurk",
-      "eldrich": "Krukru",
-      "alif": "Kurkur",
-      "like": "lis",
-      "no": "nos",
-      "not": "nris",
-      "hate": "hiss",
-      "coming": "cus",
-      "fix": "ficks",
-      "this": "tus",
-      "guy": "rash",
-      "one": "bem",
-      "two": "bum",
-      "sheep": "drus",
-      "rayyan": "Es",
-      "denzel": "Hris",
-      "kanezka": "Krus",
-      "and": "drun",
-      "why": "vren",
-      "what": "kav",
-      "who": "hurn",
-      "when": "zen",
-      "where": "vrok",
-      "strict": "srusik",
-      "because": "dravas",
-      "run": "drak",
-      "eat": "muk",
-      "see": "lok",
-      "make": "kriv",
-      "have": "sen",
-      "say": "vok",
-      "yes": "yus",
-      "nintendo": "Nunsikdo",
-      "but": "su",
-      "shit": "Sas",
-      "fuck": "fruil",
-      "sybau": "krausimp",
-      "hell": "vare",
-      "as": "sor",
-      "bad": "krak",
-      "epic": "teh",
-      "duck": "epics",
-      "that": "pak",
-      "the": "pim"
-    };
+ const dictionary = {
+  "is": "tas",
+  "also": "bum",
+  "nincompoop": "bruk",
+  "stupid": "kuku",
+  "pig": "keke",
+  "dog": "keke",
+  "good": "druk",
+  "a": "kres",
+  "to": "vreh",
+  "much": "krek",
+  "fokus": "brusk",
+  "man": "munh",
+  "more": "mrusk",
+  "go": "gus",
+  "please": "bas",
+  "babies": "brums",
+  "baby": "brum",
+  "marry": "mas",
+  "will": "wrest",
+  "spam": "spres",
+  "i": "riss",
+  "you": "van",
+  "he": "hus",
+  "her": "heur",
+  "it": "sris",
+  "they": "thus",
+  "yall": "sup",
+  "better": "sius",
+  "worser": "suis",
+  "hello": "Hais",
+  "bye": "Urs",
+  "rayhan": "Urkurk",
+  "eldrich": "Krukru",
+  "alif": "Kurkur",
+  "like": "lis",
+  "no": "nos",
+  "not": "nris",
+  "hate": "hiss",
+  "coming": "cus",
+  "fix": "ficks",
+  "this": "tus",
+  "guy": "rash",
+  "one": "bem",
+  "two": "bum",
+  "sheep": "drus",
+  "rayyan": "Es",
+  "denzel": "Hris",
+  "kanezka": "Krus",
+  "and": "drun",
+  "why": "vren",
+  "what": "kav",
+  "who": "hurn",
+  "when": "zen",
+  "where": "vrok",
+  "strict": "srusik",
+  "because": "dravas",
+  "run": "drak",
+  "eat": "muk",
+  "see": "lok",
+  "make": "kriv",
+  "have": "sen",
+  "say": "vok",
+  "yes": "yus",
+  "nintendo": "Nunsikdo",
+  "but": "su",
+  "shit": "Sas",
+  "fuck": "fruil",
+  "sybau": "krausimp",
+  "hell": "vare",
+  "as": "sor",
+  "bad": "krak",
+  "epic": "teh",
+  "duck": "epics",
+  "that": "pak",
+  "the": "pim"
+};
+
+    // Build reverse dictionary automatically
     const reverseDictionary = {};
     for (const [english, fokus] of Object.entries(dictionary)) {
       reverseDictionary[fokus.toLowerCase()] = english;
     }
+
+    // Tokenizer: keeps words, spaces, punctuation, and line breaks
     function tokenize(text) {
       return text.match(/\w+|\s+|[^\w\s]/g) || [];
     }
@@ -209,22 +213,52 @@
         return reverseDictionary[lower] || token;
       }).join("");
     }
+
+    // Grammar fixer for English output
     function grammarFix(sentence) {
       let words = sentence.split(" ");
+
+      // Verb agreement: he/she/it + hate → hates
       for (let i = 0; i < words.length - 1; i++) {
         if (["he","she","it"].includes(words[i].toLowerCase()) && words[i+1].toLowerCase() === "hate") {
           words[i+1] = "hates";
         }
       }
+
+      // Insert "am" after "I" if followed by adjective/noun
       for (let i = 0; i < words.length - 1; i++) {
         if (words[i].toLowerCase() === "i" && !["am","have","will"].includes(words[i+1].toLowerCase())) {
           words.splice(i+1, 0, "am");
         }
       }
+
+      // Fix article "a" → "an" before vowels
       for (let i = 0; i < words.length - 1; i++) {
         if (words[i].toLowerCase() === "a" && /^[aeiou]/i.test(words[i+1])) {
           words[i] = "an";
         }
       }
+
+      // Capitalize first word
       if (words.length > 0) {
-        words[0] =
+        words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+      }
+
+      return words.join(" ");
+    }
+
+    function translateToFokus() {
+      const input = document.getElementById("englishInput").value;
+      const output = translate(input);
+      document.getElementById("fokusOutput").value = output;
+    }
+
+    function translateToEnglish() {
+      const input = document.getElementById("fokusOutput").value;
+      const raw = reverseTranslate(input);
+      const fixed = grammarFix(raw);
+      document.getElementById("englishInput").value = fixed;
+    }
+  </script>
+</body>
+</html>
