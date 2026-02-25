@@ -165,23 +165,19 @@
       "duck": "epics",
       "that": "pak",
       "the": "pim",
-      "gangga" : "grango",
-      "muna" : "mona lisa",
-      "laksmi":"air",
-      "saiba" :"saiba momoi",
-      "arjuna" : "ishowsiomay",
-      "roderich" : "Rouxls Kaard",
-      "elena" : "akinobi",
-      "green" : "saruman widjaja",
-      "that" : "krus",
-      "risma" : "rizzler",
-      "ms" : "kor",
-      "ruth" : "perper",
-      "nay" : "purpur",
-      "this" : "turs"
-      
-      
-      
+      "gangga": "grango",
+      "muna": "mona lisa",
+      "laksmi": "air",
+      "saiba": "saiba momoi",
+      "arjuna": "ishowsiomay",
+      "roderich": "Rouxls Kaard",
+      "elena": "akinobi",
+      "green": "saruman widjaja",
+      "risma": "rizzler",
+      "ms": "kor",
+      "ruth": "perper",
+      "nay": "purpur",
+      "this": "turs"
     };
 
     const reverseDictionary = {};
@@ -195,18 +191,12 @@
 
     function translate(text) {
       const tokens = tokenize(text);
-      return tokens.map(token => {
-        const lower = token.toLowerCase();
-        return dictionary[lower] || token;
-      }).join(" ");
+      return tokens.map(token => dictionary[token.toLowerCase()] || token).join(" ");
     }
 
     function reverseTranslate(text) {
       const tokens = tokenize(text);
-      return tokens.map(token => {
-        const lower = token.toLowerCase();
-        return reverseDictionary[lower] || token;
-      }).join(" ");
+      return tokens.map(token => reverseDictionary[token.toLowerCase()] || token).join(" ");
     }
 
     function grammarFix(sentence) {
@@ -244,22 +234,12 @@
       const fixed = grammarFix(raw);
       document.getElementById("englishInput").value = fixed;
     }
-      function translateToEnglish() {
-      const input = document.getElementById("fokusOutput").value;
-      const raw = reverseTranslate(input);
-      const fixed = grammarFix(raw);
-      document.getElementById("englishInput").value = fixed;
-    }
 
     // 🔑 Attach listeners only after DOM is ready
     document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("englishInput").addEventListener("input", translateToFokus);
       document.getElementById("fokusOutput").addEventListener("input", translateToEnglish);
     });
-
   </script>
 </body>
-
 </html>
-
-
