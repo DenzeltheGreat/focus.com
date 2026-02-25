@@ -227,9 +227,20 @@
       const fixed = grammarFix(raw);
       document.getElementById("englishInput").value = fixed;
     }
-     document.getElementById("englishInput").addEventListener("input", translateToFokus);
-    document.getElementById("fokusOutput").addEventListener("input", translateToEnglish);
+      function translateToEnglish() {
+      const input = document.getElementById("fokusOutput").value;
+      const raw = reverseTranslate(input);
+      const fixed = grammarFix(raw);
+      document.getElementById("englishInput").value = fixed;
+    }
+
+    // 🔑 Attach listeners only after DOM is ready
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("englishInput").addEventListener("input", translateToFokus);
+      document.getElementById("fokusOutput").addEventListener("input", translateToEnglish);
+    });
 
   </script>
 </body>
+
 </html>
