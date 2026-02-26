@@ -4,7 +4,85 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AntiFokus Translator</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+body {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  margin: 0;
+  padding: 40px 20px;
+  color: white;
+}
+
+header {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.container {
+  display: flex;
+  max-width: 1000px;
+  margin: auto;
+  background: rgba(0,140,255,0.08);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(0,140,255,0.2);
+}
+
+.box:last-child {
+  border-right: none;
+}
+
+h3 {
+  margin: 0;
+  padding: 15px;
+  background: rgba(0,140,255,0.1);
+}
+
+textarea {
+  flex: 1;
+  border: none;
+  resize: none;
+  padding: 20px;
+  font-size: 16px;
+  background: transparent;
+  color: white;
+  outline: none;
+}
+
+.controls {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  background: #00eaff;
+  color: black;
+}
+
+#dictionaryPanel {
+  display: none;
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+}
+</style>
 </head>
 
 <body>
@@ -12,17 +90,14 @@
 <header>AntiFokus Translator</header>
 
 <div class="container">
-
   <div class="box">
     <h3>English</h3>
-    <textarea id="englishInput" placeholder="Type English..."></textarea>
+    <textarea id="englishInput"></textarea>
   </div>
-
   <div class="box">
     <h3>AntiFokus</h3>
-    <textarea id="fokusOutput" placeholder="AntiFokus output..."></textarea>
+    <textarea id="fokusOutput"></textarea>
   </div>
-
 </div>
 
 <div class="controls">
@@ -33,11 +108,7 @@
 <div id="dictionaryPanel"></div>
 
 <script>
-
-/* ================= DICTIONARY ================= */
-
-const dictionary = {
-
+  const dictionary = {
   "eldrich": "Krukru",
   "alif" : "Kurkur",
   "rayhan": "Urkurk",
@@ -212,20 +283,14 @@ const dictionary = {
   "use": "usenok"
 };
 
-/* ================= REVERSE ================= */
-
 const reverseDictionary = {};
 for(const [eng,fok] of Object.entries(dictionary)){
   reverseDictionary[fok.toLowerCase()] = eng;
 }
 
-/* ================= TOKEN ================= */
-
 function tokenize(text){
   return text.match(/\w+|\s+|[^\w\s]/g) || [];
 }
-
-/* ================= AUTO SYSTEM ================= */
 
 function autoGenerate(word){
   let w = word.toLowerCase();
@@ -234,8 +299,6 @@ function autoGenerate(word){
   if(w.endsWith("ed")) return w.slice(0,-2)+"edr";
   return w+"a";
 }
-
-/* ================= TRANSLATE ================= */
 
 function translate(text){
   return tokenize(text)
@@ -253,8 +316,6 @@ function reverseTranslate(text){
     .map(t=>reverseDictionary[t.toLowerCase()]||t)
     .join("");
 }
-
-/* ================= AUTO EVENT ================= */
 
 let lock=false;
 
@@ -275,14 +336,11 @@ fokusOutput.addEventListener("input",function(){
   lock=false;
 });
 
-/* ================= BUTTON ================= */
-
 function manualTranslate(){
   fokusOutput.value=translate(englishInput.value);
 }
 
 function toggleDictionary(){
-
   const panel=document.getElementById("dictionaryPanel");
 
   if(panel.style.display==="block"){
@@ -292,16 +350,13 @@ function toggleDictionary(){
 
   let html="";
   for(const [eng,fok] of Object.entries(dictionary)){
-    html += `<b>${eng}</b> → ${fok}<br>`;
+    html += "<div>"+eng+" → "+fok+"</div>";
   }
 
   panel.innerHTML=html;
   panel.style.display="block";
 }
-
 </script>
 
 </body>
 </html>
-
-
