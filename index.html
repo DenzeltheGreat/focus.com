@@ -2,389 +2,167 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Fokus Translate</title>
-
-<style>
-body {
-  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-  background: linear-gradient(135deg, #ece9e6, #ffffff);
-  margin: 0;
-  padding: 0;
-  color: #333;
-}
-header {
-  background: linear-gradient(90deg, #4facfe, #00f2fe);
-  color: white;
-  padding: 20px;
-  text-align: center;
-  font-size: 1.8em;
-  font-weight: bold;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-.container {
-  display: flex;
-  justify-content: center;
-  margin: 40px auto;
-  gap: 30px;
-  max-width: 1000px;
-}
-.box {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  width: 45%;
-  padding: 25px;
-}
-h3 {
-  margin-top: 0;
-  font-size: 1.2em;
-  color: #4facfe;
-  border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 8px;
-}
-textarea {
-  width: 100%;
-  height: 180px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  resize: none;
-  font-size: 1em;
-  padding: 10px;
-}
-a {
-  display: block;
-  text-align: center;
-  margin: 20px auto;
-  color: #4facfe;
-  text-decoration: none;
-  font-weight: bold;
-}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AntiFokus Translator</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>Fokus Translate</header>
+<header>AntiFokus Translator</header>
 
 <div class="container">
+
   <div class="box">
     <h3>English</h3>
-    <textarea id="englishInput" placeholder="Type English here..."></textarea>
+    <textarea id="englishInput" placeholder="Type English..."></textarea>
   </div>
 
   <div class="box">
-    <h3>AntiFokus Language</h3>
-    <textarea id="fokusOutput" placeholder="Type AntiFokus here..."></textarea>
+    <h3>AntiFokus</h3>
+    <textarea id="fokusOutput" placeholder="AntiFokus output..."></textarea>
   </div>
+
 </div>
 
-<a href="https://nofocus.com" target="_blank">Visit NoFocus</a>
+<div class="controls">
+  <button onclick="manualTranslate()">Translate</button>
+  <button onclick="toggleDictionary()">📖 Kamus</button>
+</div>
+
+<div id="dictionaryPanel"></div>
 
 <script>
 
-document.addEventListener("DOMContentLoaded", function() {
+/* ================= DICTIONARY ================= */
 
 const dictionary = {
-  "eldrich": "Krukru",
-  "alif" : "Kurkur",
-  "rayhan": "Urkurk",
-  "denzel": "harristing",
-  "rayyan": "Esterik",
-  "kanezka":"Jurseblame",
-  "is": "tas",
-  "also": "bum",
-  "nincompoop": "bruk",
-  "stupid": "kuku",
-  "pig": "keke",
-  "dog": "krekre",
-  "good": "druk",
-  "a": "kres",
-  "to": "vreh",
-  "much": "krek",
-  "fokus": "brusk",
-  "man": "munh",
-  "more": "mrusk",
-  "go": "gus",
-  "please": "bas",
-  "babies": "brums",
-  "baby": "brum",
-  "marry": "mas",
-  "will": "wrest",
-  "spam": "spres",
-  "i": "riss",
-  "you": "van",
-  "he": "hus",
-  "her": "heur",
-  "it": "sris",
-  "they": "thus",
-  "yall": "sup",
-  "better": "sius",
-  "worser": "suis",
-  "hello": "hais",
-  "bye": "urs",
-  "like": "lis",
-  "no": "nos",
-  "not": "nris",
-  "hate": "hiss",
-  "coming": "cus",
-  "fix": "ficks",
-  "this": "turs",
-  "guy": "rash",
-  "one": "bem",
-  "two": "bum",
-  "sheep": "drus",
-  "and": "drun",
-  "why": "vren",
-  "what": "kav",
-  "who": "hurn",
-  "when": "zen",
-  "where": "vrok",
-  "strict": "srusik",
-  "because": "dravas",
-  "run": "drak",
-  "eat": "muk",
-  "see": "lok",
-  "make": "kriv",
-  "have": "sen",
-  "say": "vok",
-  "yes": "yus",
-  "but": "su",
-  "hell": "vare",
-  "as": "sor",
-  "bad": "krak",
-  "epic": "teh",
-  "duck": "epics",
-  "that": "pak",
-  "the": "pim",
-  "annoying": "krau",
-  "so": "vamp",
-  "very": "drav",
-  "get": "hars",
-  "how": "berk",
-  "schnitzel": "enok",
-  "top": "krim",
-  "first": "bemt",
-  "second": "bumt",
-  "people": "purs",
-  "ms" : "kor",
-  "risma" : "rizzler",
-  "ruth" : "perper",
-  "nay" : "purator",
-  "saiba" : "saiba momoi",
-  "green" : "saruman widjaja",
-  "gangga": "grango",
-  "muna" : "muna lisa",
-  "laksmi": "smortah",
-  "battle": "drakon",
-  "fight": "kravos",
-  "win": "zeth",
-  "lose": "vrak",
-  "enemy": "moruk",
-  "power": "dravos",
-  "king": "valdrin",
-  "queen": "valdra",
-  "or": "vor",
-  "although": "kravas",
-  "if": "vrek",
-  "while": "zurn",
-  "before": "pren",
-  "after": "zren",
-  "until": "drent",
-  "be": "zor",
-  "do": "vrosk",
-  "take": "dravk",
-  "give": "morsk",
-  "know": "krav",
-  "think": "zethar",
-  "want": "vash",
-  "need": "drash",
-  "build": "kravar",
-  "create": "zarkiv",
-  "destroy": "morvak",
-  "strong": "dravik",
-  "weak": "vrinik",
-  "fast": "zark",
-  "slow": "murn",
-  "big": "drum",
-  "small": "krin",
-  "beautiful": "zelra",
-  "ugly": "morra",
-  "new": "zena",
-  "old": "vrana",
-  "happy": "zuna",
-  "sad": "vrina",
-  "woman": "valra",
-  "child": "brun",
-  "friend": "mav",
-  "family": "druna",
-  "home": "kraven",
-  "school": "krimtal",
-  "teacher": "vorsk",
-  "student": "kravik",
-  "world": "zoren",
-  "time": "draken",
-  "war": "morvak",
-  "peace": "valen",
-  "truth": "zareth",
-  "lie": "morik",
-  "always": "dravan",
-  "never": "vrakan",
-  "often": "zuren",
-  "sometimes": "moren",
-  "now": "zenka",
-  "yesterday": "vorsh",
-  "today": "zenka",
-  "tomorrow": "draka",
-  "here": "vrokal",
-  "there": "morokal",
-  "in": "ven",
-  "on": "prenik",
-  "at": "vrenik",
-  "from": "murnik",
-  "with": "drunik",
-  "without": "vrunik",
-  "under": "krunik",
-  "over": "zrunik",
-  "into": "vrentik",
-  "through": "draventik",
-  "which": "kravik",
-  "three": "zrum",
-  "four": "krum",
-  "five": "dravum",
-  "many": "mrav",
-  "few": "vrim",
-  "all": "draval",
-  "some": "moril",
-  "every": "zarel",
-  "none": "vranel",
-  "love": "luma",
-  "hate": "hatax",
-  "cool": "coro",
-  "nice": "nara",
-  "fun": "funa",
-  "boring": "bora",
-  "smart": "soma",
-  "strong": "stro",
-  "weak": "wema",
-  "tired": "tira",
-  "hungry": "huna",
-  "sleep": "nina",
-  "dream": "dora",
-  "play": "pala",
-  "work": "woka",
-  "read": "reda",
-  "write": "rita",
-  "listen": "lisa",
-  "talk": "toka",
-  "walk": "waka",
-  "sit": "sita",
-  "stand": "stana",
-  "open": "opra",
-  "close": "closa",
-  "light": "lita",
-  "dark": "dara",
-  "fire": "fira",
-  "water": "wata",
-  "earth": "tera",
-  "wind": "wina",
-  "day": "dina",
-  "night": "nita",
-  "sun": "suna",
-  "moon": "munae",
-  "star": "stara",
-  "life": "lifa",
-  "death": "detha",
-  "heart": "harta",
-  "mind": "minda"
+
+  "hello":"hais",
+  "bye":"urs",
+
+  "i":"riss",
+  "you":"van",
+  "he":"hus",
+  "she":"vash",
+  "it":"sris",
+  "they":"thus",
+
+  "is":"tas",
+  "am":"tas",
+  "are":"tas",
+
+  "good":"druk",
+  "bad":"krak",
+  "very":"drav",
+
+  "the":"pim",
+  "a":"kres",
+  "and":"drun",
+  "but":"su",
+  "because":"dravas",
+
+  "like":"lis",
+  "love":"luma",
+  "hate":"hiss",
+
+  "water":"wata",
+  "bread":"rota",
+
+  "ms":"kor",
+  "ruth":"perper",
+  "saiba":"saiba momoi",
+  "laksmi":"smortah"
 };
 
-// Reverse dictionary
+/* ================= REVERSE ================= */
+
 const reverseDictionary = {};
-for (const [eng, fok] of Object.entries(dictionary)) {
+for(const [eng,fok] of Object.entries(dictionary)){
   reverseDictionary[fok.toLowerCase()] = eng;
 }
 
-// Tokenizer
+/* ================= TOKEN ================= */
+
 function tokenize(text){
   return text.match(/\w+|\s+|[^\w\s]/g) || [];
 }
 
-// Auto generator (kalau kata tidak ada di dictionary)
+/* ================= AUTO SYSTEM ================= */
+
 function autoGenerate(word){
   let w = word.toLowerCase();
-
-  // kalau ada di dictionary
-  if(dictionary[w]) return dictionary[w];
-
-  // plural
-  if(w.endsWith("s") && w.length > 3){
-    return w.slice(0,-1) + "sik";
-  }
-
-  // verb -ing
-  if(w.endsWith("ing")){
-    return w.slice(0,-3) + "o";
-  }
-
-  // past tense
-  if(w.endsWith("ed")){
-    return w.slice(0,-2) + "edr";
-  }
-
-  // default
-  return w + "a";
+  if(w.endsWith("s") && w.length>3) return w.slice(0,-1)+"sik";
+  if(w.endsWith("ing")) return w.slice(0,-3)+"o";
+  if(w.endsWith("ed")) return w.slice(0,-2)+"edr";
+  return w+"a";
 }
 
-// Translate (English → Fokus)
+/* ================= TRANSLATE ================= */
+
 function translate(text){
   return tokenize(text)
-    .map(t => {
-      let w = t.toLowerCase();
-
-      // kalau ada di dictionary
+    .map(t=>{
+      let w=t.toLowerCase();
       if(dictionary[w]) return dictionary[w];
-
-      // kalau bukan huruf (spasi/tanda baca)
       if(!/^[a-z]+$/i.test(t)) return t;
-
-      // generate
       return autoGenerate(w);
     })
     .join("");
 }
 
-// Reverse (Fokus → English)
 function reverseTranslate(text){
   return tokenize(text)
-    .map(t => reverseDictionary[t.toLowerCase()] || t)
+    .map(t=>reverseDictionary[t.toLowerCase()]||t)
     .join("");
 }
 
-// Event system
-let lock = false;
+/* ================= AUTO EVENT ================= */
 
-const englishInput = document.getElementById("englishInput");
-const fokusOutput = document.getElementById("fokusOutput");
+let lock=false;
 
-englishInput.addEventListener("input", function(){
+const englishInput=document.getElementById("englishInput");
+const fokusOutput=document.getElementById("fokusOutput");
+
+englishInput.addEventListener("input",function(){
   if(lock) return;
-  lock = true;
-  fokusOutput.value = translate(this.value);
-  lock = false;
+  lock=true;
+  fokusOutput.value=translate(this.value);
+  lock=false;
 });
 
-fokusOutput.addEventListener("input", function(){
+fokusOutput.addEventListener("input",function(){
   if(lock) return;
-  lock = true;
-  englishInput.value = reverseTranslate(this.value);
-  lock = false;
+  lock=true;
+  englishInput.value=reverseTranslate(this.value);
+  lock=false;
 });
+
+/* ================= BUTTON ================= */
+
+function manualTranslate(){
+  fokusOutput.value=translate(englishInput.value);
+}
+
+function toggleDictionary(){
+
+  const panel=document.getElementById("dictionaryPanel");
+
+  if(panel.style.display==="block"){
+    panel.style.display="none";
+    return;
+  }
+
+  let html="";
+  for(const [eng,fok] of Object.entries(dictionary)){
+    html += `<b>${eng}</b> → ${fok}<br>`;
+  }
+
+  panel.innerHTML=html;
+  panel.style.display="block";
+}
 
 </script>
 
 </body>
-
 </html>
-
-
