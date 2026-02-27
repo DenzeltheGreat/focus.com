@@ -313,90 +313,122 @@ const dictionary = {
   "worst": "haws"
 };
   
-  // === Reverse Dictionary ===
-  const reverseDictionary = {};
+// ================= BUILD REVERSE =================
 
-  // === Tokenizer ===
-  function tokenize(text) {
-    return text.match(/\w+|\s+|[^\w\s]/g) || [];
-  }
+const reverseDictionary = {};
 
-  // === Auto Generate (fallback for unknown words) ===
-  function autoGenerate(word) {
-    let w = word.toLowerCase();
-    if (w.endsWith("s") && w.length > 3) return w.slice(0, -1) + "sik";
-    if (w.endsWith("ing")) return w.slice(0, -3) + "o";
-    if (w.endsWith("ed")) return w.slice(0, -2) + "edr";
-    return w + "a";
-  }
+for (const [eng, fok] of Object.entries(dictionary)) {
+  reverseDictionary[fok.toLowerCase()] = eng;
+}
 
-  // === Translate Functions ===
-  function translate(text) {
-    return tokenize(text)
-      .map(t => {
-        let w = t.toLowerCase();
-        if (dictionary && dictionary[w]) return dictionary[w];
-        if (!/^[a-z]+$/i.test(t)) return t;
-        return autoGenerate(w);
-      })
-      .join("");
-  }
 
-  function reverseTranslate(text) {
-    return tokenize(text)
-      .map(t => reverseDictionary[t.toLowerCase()] || t)
-      .join("");
-  }
+// ================= TOKENIZER =================
 
-  // === Event Listeners ===
-  let lock = false;
-  const englishInput = document.getElementById("englishInput");
-  const fokusOutput = document.getElementById("fokusOutput");
+function tokenize(text) {
+  return text.match(/\w+|\s+|[^\w\s]/g) || [];
+}
 
-  englishInput.addEventListener("input", function() {
-    if (lock) return;
-    lock = true;
-    fokusOutput.value = translate(this.value);
-    lock = false;
-  });
 
-  fokusOutput.addEventListener("input", function() {
-    if (lock) return;
-    lock = true;
-    englishInput.value = reverseTranslate(this.value);
-    lock = false;
-  });
+// ================= AUTO GENERATE =================
 
-  // === Manual Translate Button ===
-  function manualTranslate() {
-    fokusOutput.value = translate(englishInput.value);
-  }
+function autoGenerate(word) {
+  let w = word.toLowerCase();
 
-  // === Toggle Dictionary Panel ===
-  function toggleDictionary() {
-    const panel = document.getElementById("dictionaryPanel");
+  if (w.endsWith("s") && w.length > 3) return w.slice(0, -1) + "sik";
+  if (w.endsWith("ing")) return w.slice(0, -3) + "o";
+  if (w.endsWith("ed")) return w.slice(0, -2) + "edr";
 
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-      return;
-    }
+  return w + "a";
+}
 
-    let html = "";
-    if (dictionary) {
-      for (const [eng, fok] of Object.entries(dictionary)) {
-        html += "<div>" + eng + " → " + fok + "</div>";
+
+// ================= TRANSLATE =================
+
+function translate(text) {
+  return tokenize(text)
+    .map(t => {
+
+      // angka langsung translate
+      if (/^\d+$/.test(t) && dictionary[t]) {
+        return dictionary[t];
       }
-    }
 
-    panel.innerHTML = html;
-    panel.style.display = "block";
+      let w = t.toLowerCase();
+
+      if (dictionary[w]) return dictionary[w];
+
+      if (!/^[a-z]+$/i.test(t)) return t;
+
+      return autoGenerate(w);
+    })
+    .join("");
+}
+
+
+// ================= REVERSE =================
+
+function reverseTranslate(text) {
+  return tokenize(text)
+    .map(t => reverseDictionary[t.toLowerCase()] || t)
+    .join("");
+}
+
+
+// ================= EVENT SYSTEM =================
+
+let lock = false;
+
+const englishInput = document.getElementById("englishInput");
+const fokusOutput = document.getElementById("fokusOutput");
+
+englishInput.addEventListener("input", function() {
+  if (lock) return;
+  lock = true;
+  fokusOutput.value = translate(this.value);
+  lock = false;
+});
+
+fokusOutput.addEventListener("input", function() {
+  if (lock) return;
+  lock = true;
+  englishInput.value = reverseTranslate(this.value);
+  lock = false;
+});
+
+
+// ================= BUTTON =================
+
+function manualTranslate() {
+  fokusOutput.value = translate(englishInput.value);
+}
+
+
+function toggleDictionary() {
+
+  const panel = document.getElementById("dictionaryPanel");
+
+  if (panel.style.display === "block") {
+    panel.style.display = "none";
+    return;
   }
+
+  let html = "";
+
+  for (const [eng, fok] of Object.entries(dictionary)) {
+    html += "<div>" + eng + " → " + fok + "</div>";
+  }
+
+  panel.innerHTML = html;
+  panel.style.display = "block";
+}
+
 </script>
 
 </body>
 </html>
 
 totally random text
+
 
 
 
