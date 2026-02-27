@@ -313,60 +313,28 @@ const dictionary = {
   "worst": "haws"
 };
   
-// ================= BUILD REVERSE =================
-
+// ===== BUILD REVERSE =====
 const reverseDictionary = {};
-
 for (const [eng, fok] of Object.entries(dictionary)) {
   reverseDictionary[fok.toLowerCase()] = eng;
 }
 
 
-// ================= TOKENIZER =================
-
+// ===== TOKENIZER =====
 function tokenize(text) {
   return text.match(/\w+|\s+|[^\w\s]/g) || [];
 }
 
 
-// ================= AUTO GENERATE =================
-
-function autoGenerate(word) {
-  let w = word.toLowerCase();
-
-  if (w.endsWith("s") && w.length > 3) return w.slice(0, -1) + "sik";
-  if (w.endsWith("ing")) return w.slice(0, -3) + "o";
-  if (w.endsWith("ed")) return w.slice(0, -2) + "edr";
-
-  return w + "a";
-}
-
-
-// ================= TRANSLATE =================
-
+// ===== TRANSLATE =====
 function translate(text) {
   return tokenize(text)
-    .map(t => {
-
-      // angka langsung translate
-      if (/^\d+$/.test(t) && dictionary[t]) {
-        return dictionary[t];
-      }
-
-      let w = t.toLowerCase();
-
-      if (dictionary[w]) return dictionary[w];
-
-      if (!/^[a-z]+$/i.test(t)) return t;
-
-      return autoGenerate(w);
-    })
+    .map(t => dictionary[t.toLowerCase()] || t)
     .join("");
 }
 
 
-// ================= REVERSE =================
-
+// ===== REVERSE =====
 function reverseTranslate(text) {
   return tokenize(text)
     .map(t => reverseDictionary[t.toLowerCase()] || t)
@@ -374,8 +342,7 @@ function reverseTranslate(text) {
 }
 
 
-// ================= EVENT SYSTEM =================
-
+// ===== EVENTS =====
 let lock = false;
 
 const englishInput = document.getElementById("englishInput");
@@ -395,39 +362,13 @@ fokusOutput.addEventListener("input", function() {
   lock = false;
 });
 
-
-// ================= BUTTON =================
-
-function manualTranslate() {
-  fokusOutput.value = translate(englishInput.value);
-}
-
-
-function toggleDictionary() {
-
-  const panel = document.getElementById("dictionaryPanel");
-
-  if (panel.style.display === "block") {
-    panel.style.display = "none";
-    return;
-  }
-
-  let html = "";
-
-  for (const [eng, fok] of Object.entries(dictionary)) {
-    html += "<div>" + eng + " → " + fok + "</div>";
-  }
-
-  panel.innerHTML = html;
-  panel.style.display = "block";
-}
-
 </script>
 
 </body>
 </html>
 
 totally random text
+
 
 
 
