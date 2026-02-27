@@ -106,308 +106,287 @@ button {
 </div>
 
 <div id="dictionaryPanel"></div>
-
 <script>
 
 // ================= DICTIONARY =================
 const dictionary = {
-  "eldrich": "Krukru",
-  "alif": "Kurkur",
-  "rayhan": "Urkurk",
-  "denzel": "Harristing",
-  "rayyan": "Esterik",
-  "kanezka": "Jurseblame",
-  "is": "tas",
-  "are": "tas",
-  "still": "krim",
-  "also": "bum",
-  "nincompoop": "bruk",
-  "stupid": "kuku",
-  "pig": "keke",
-  "dog": "keke",
-  "good": "druk",
-  "a": "kres",
-  "to": "vreh",
-  "much": "krek",
-  "fokus": "brusk",
-  "man": "munh",
-  "more": "mrusk",
-  "go": "gus",
-  "please": "bas",
-  "babies": "brums",
-  "baby": "brum",
-  "marry": "mas",
-  "will": "wrest",
-  "spam": "spres",
-  "i": "riss",
-  "you": "van",
-  "he": "hus",
-  "her": "heur",
-  "it": "sris",
-  "they": "thus",
-  "yall": "sup",
-  "better": "sius",
-  "worser": "suis",
-  "hello": "hais",
-  "bye": "urs",
-  "like": "lis",
-  "no": "nos",
-  "not": "nris",
-  "hate": "hiss",
-  "coming": "cus",
-  "fix": "ficks",
-  "this": "turs",
-  "guy": "rash",
-  "one": "bem",
-  "two": "bum",
-  "sheep": "drus",
-  "and": "drun",
-  "why": "vren",
-  "what": "kav",
-  "who": "hurn",
-  "when": "zen",
-  "where": "vrok",
-  "strict": "srusik",
-  "because": "dravas",
-  "run": "drak",
-  "eat": "muk",
-  "see": "lok",
-  "make": "kriv",
-  "have": "sen",
-  "say": "vok",
-  "yes": "yus",
-  "but": "su",
-  "hell": "vare",
-  "as": "sor",
-  "bad": "krak",
-  "epic": "teh",
-  "duck": "epics",
-  "that": "pak",
-  "the": "pim",
-  "annoying": "krau",
-  "so": "vamp",
-  "very": "drav",
-  "get": "hars",
-  "how": "berk",
-  "schnitzel": "enok",
-  "top": "krim",
-  "first": "bemt",
-  "second": "bumt",
-  "people": "purs",
-  "ms": "kor",
-  "risma": "rizzler",
-  "ruth": "perper",
-  "nay": "purator",
-  "saiba": "saiba momoi",
-  "green": "saruman widjaja",
-  "gangga": "grango",
-  "muna": "muna lisa",
-  "laksmi": "smortah",
-  "fuck": "kraumas",
-  "sybau": "krausimp",
-  "shit": "kraukrau",
-  "ugly": "fruy",
-  "punch": "graw",
-  "we": "dris",
-  "us": "vrun",
-  "our": "dravun",
-  "mine": "riska",
-  "yours": "varka",
-  "their": "thurak",
-  "be": "zeth",
-  "do": "krav",
-  "did": "kraven",
-  "done": "kraveth",
-  "can": "zul",
-  "could": "zulen",
-  "should": "shur",
-  "would": "wur",
-  "must": "murk",
-  "today": "zenka",
-  "tomorrow": "draka",
-  "yesterday": "vorsh",
-  "now": "neth",
-  "later": "luren",
-  "soon": "surel",
-  "always": "dravan",
-  "never": "vrakan",
-  "sometimes": "moren",
-  "often": "zuren",
-  "big": "drumak",
-  "small": "krinel",
-  "long": "lurnak",
-  "short": "shurnel",
-  "high": "hiraq",
-  "low": "lomaq",
-  "new": "zenaq",
-  "old": "vranaq",
-  "young": "yunel",
-  "happy": "zunel",
-  "sad": "vrinel",
-  "angry": "kronel",
-  "tired": "tirak",
-  "hungry": "hunel",
-  "friend": "mavrek",
-  "family": "drunel",
-  "home": "kraven",
-  "house": "kravon",
-  "room": "ravel",
-  "door": "dorak",
-  "window": "winel",
-  "school": "krimtal",
-  "teacher": "vorskel",
-  "student": "kravel",
-  "class": "klaven",
-  "study": "studren",
-  "learn": "lernok",
-  "book": "bravel",
-  "pen": "prenok",
-  "food": "furek",
-  "drink": "drikel",
-  "rice": "riven",
-  "meat": "murek",
-  "milk": "melun",
-  "money": "monel",
-  "work": "wurek",
-  "job": "jurek",
-  "shop": "shopen",
-  "market": "marken",
-  "car": "karel",
-  "road": "rodak",
-  "city": "cirek",
-  "village": "vilrek",
-  "country": "contrak",
-  "world": "zoren",
-  "start": "starnok",
-  "stop": "stopren",
-  "open": "opren",
-  "close": "cloren",
-  "help": "helrek",
-  "try": "triven",
-  "use": "usenok",
-  "want": "pora",
-  "actually": "kausi",
-  "my": "pora",
-  "suck": "kraupah",
-  "chat": "hapis",
-  "happen": "bras",
-  "roderich": "manissusudarmienaksapitehrod",
-  "snitch": "bwur",
-  "face": "pow",
-  "look": "lok",
-  "1": "una",
-  "2": "dura",
-  "3": "trina",
-  "4": "qara",
-  "5": "penta",
-  "6": "hexa",
-  "7": "septa",
-  "8": "okta",
-  "9": "nava",
-  "less": "suh",
-  "ruthless": "korsuh",
-  "traitor": "kop",
-  "ruins": "sruks",
-  "ruin": "sruk",
-  "fun": "kroh",
-  "best": "pran",
-  "worst": "haws",
-  "smart": "sprit"
+  "eldrich":"Krukru",
+  "alif":"Kurkur",
+  "rayhan":"Urkurk",
+  "denzel":"Harristing",
+  "rayyan":"Esterik",
+  "kanezka":"Jurseblame",
+  "is":"tas",
+  "are":"tas",
+  "still":"krim",
+  "also":"bum",
+  "nincompoop":"bruk",
+  "stupid":"kuku",
+  "pig":"keke",
+  "dog":"keke",
+  "good":"druk",
+  "a":"kres",
+  "to":"vreh",
+  "much":"krek",
+  "fokus":"brusk",
+  "man":"munh",
+  "more":"mrusk",
+  "go":"gus",
+  "please":"bas",
+  "babies":"brums",
+  "baby":"brum",
+  "marry":"mas",
+  "will":"wrest",
+  "spam":"spres",
+  "i":"riss",
+  "you":"van",
+  "he":"hus",
+  "her":"heur",
+  "it":"sris",
+  "they":"thus",
+  "yall":"sup",
+  "better":"sius",
+  "worser":"suis",
+  "hello":"hais",
+  "bye":"urs",
+  "like":"lis",
+  "no":"nos",
+  "not":"nris",
+  "hate":"hiss",
+  "coming":"cus",
+  "fix":"ficks",
+  "this":"turs",
+  "guy":"rash",
+  "one":"bem",
+  "two":"bum",
+  "sheep":"drus",
+  "and":"drun",
+  "why":"vren",
+  "what":"kav",
+  "who":"hurn",
+  "when":"zen",
+  "where":"vrok",
+  "strict":"srusik",
+  "because":"dravas",
+  "run":"drak",
+  "eat":"muk",
+  "see":"lok",
+  "make":"kriv",
+  "have":"sen",
+  "say":"vok",
+  "yes":"yus",
+  "but":"su",
+  "hell":"vare",
+  "as":"sor",
+  "bad":"krak",
+  "epic":"teh",
+  "duck":"epics",
+  "that":"pak",
+  "the":"pim",
+  "annoying":"krau",
+  "so":"vamp",
+  "very":"drav",
+  "get":"hars",
+  "how":"berk",
+  "schnitzel":"enok",
+  "top":"krim",
+  "first":"bemt",
+  "second":"bumt",
+  "people":"purs",
+  "ms":"kor",
+  "risma":"rizzler",
+  "ruth":"perper",
+  "nay":"purator",
+  "saiba":"saiba momoi",
+  "green":"saruman widjaja",
+  "gangga":"grango",
+  "muna":"muna lisa",
+  "laksmi":"smortah",
+  "fuck":"kraumas",
+  "sybau":"krausimp",
+  "shit":"kraukrau",
+  "ugly":"fruy",
+  "punch":"graw",
+  "we":"dris",
+  "us":"vrun",
+  "our":"dravun",
+  "mine":"riska",
+  "yours":"varka",
+  "their":"thurak",
+  "be":"zeth",
+  "do":"krav",
+  "did":"kraven",
+  "done":"kraveth",
+  "can":"zul",
+  "could":"zulen",
+  "should":"shur",
+  "would":"wur",
+  "must":"murk",
+  "today":"zenka",
+  "tomorrow":"draka",
+  "yesterday":"vorsh",
+  "now":"neth",
+  "later":"luren",
+  "soon":"surel",
+  "always":"dravan",
+  "never":"vrakan",
+  "sometimes":"moren",
+  "often":"zuren",
+  "big":"drumak",
+  "small":"krinel",
+  "long":"lurnak",
+  "short":"shurnel",
+  "high":"hiraq",
+  "low":"lomaq",
+  "new":"zenaq",
+  "old":"vranaq",
+  "young":"yunel",
+  "happy":"zunel",
+  "sad":"vrinel",
+  "angry":"kronel",
+  "tired":"tirak",
+  "hungry":"hunel",
+  "friend":"mavrek",
+  "family":"drunel",
+  "home":"kraven",
+  "house":"kravon",
+  "room":"ravel",
+  "door":"dorak",
+  "window":"winel",
+  "school":"krimtal",
+  "teacher":"vorskel",
+  "student":"kravel",
+  "class":"klaven",
+  "study":"studren",
+  "learn":"lernok",
+  "book":"bravel",
+  "pen":"prenok",
+  "food":"furek",
+  "drink":"drikel",
+  "rice":"riven",
+  "meat":"murek",
+  "milk":"melun",
+  "money":"monel",
+  "work":"wurek",
+  "job":"jurek",
+  "shop":"shopen",
+  "market":"marken",
+  "car":"karel",
+  "road":"rodak",
+  "city":"cirek",
+  "village":"vilrek",
+  "country":"contrak",
+  "world":"zoren",
+  "start":"starnok",
+  "stop":"stopren",
+  "open":"opren",
+  "close":"cloren",
+  "help":"helrek",
+  "try":"triven",
+  "use":"usenok",
+  "want":"pora",
+  "actually":"kausi",
+  "my":"pora",
+  "suck":"kraupah",
+  "chat":"hapis",
+  "happen":"bras",
+  "roderich":"manissusudarmienaksapitehrod",
+  "snitch":"bwur",
+  "face":"pow",
+  "look":"lok",
+  "1":"una",
+  "2":"dura",
+  "3":"trina",
+  "4":"qara",
+  "5":"penta",
+  "6":"hexa",
+  "7":"septa",
+  "8":"okta",
+  "9":"nava",
+  "less":"suh",
+  "ruthless":"korsuh",
+  "traitor":"kop",
+  "ruins":"sruks",
+  "ruin":"sruk",
+  "fun":"kroh",
+  "best":"pran",
+  "worst":"haws",
+  "smart":"sprit"
 };
+
 
 // ================= BUILD REVERSE =================
 const reverseDictionary = {};
-
-function buildReverseDictionary() {
-  for (const key in reverseDictionary) {
-    delete reverseDictionary[key];
-  }
-
-  for (const [eng, fok] of Object.entries(dictionary)) {
-    reverseDictionary[fok.toLowerCase()] = eng;
-  }
+for (const [eng,fok] of Object.entries(dictionary)) {
+  reverseDictionary[fok.toLowerCase()] = eng;
 }
-
-buildReverseDictionary();
 
 
 // ================= TOKENIZER =================
-function tokenize(text) {
+function tokenize(text){
   return text.match(/\w+|\s+|[^\w\s]/g) || [];
 }
 
 
 // ================= TRANSLATE =================
-function translate(text) {
+function translate(text){
   return tokenize(text)
-    .map(token => {
-      const lower = token.toLowerCase();
-      if (dictionary[lower]) return dictionary[lower];
-      return token;
-    })
+    .map(t => dictionary[t.toLowerCase()] || t)
     .join("");
 }
 
 
 // ================= REVERSE =================
-function reverseTranslate(text) {
+function reverseTranslate(text){
   return tokenize(text)
-    .map(token => {
-      const lower = token.toLowerCase();
-      if (reverseDictionary[lower]) return reverseDictionary[lower];
-      return token;
-    })
+    .map(t => reverseDictionary[t.toLowerCase()] || t)
     .join("");
 }
 
 
 // ================= EVENTS =================
-let lock = false;
+let lock=false;
 
-const englishInput = document.getElementById("englishInput");
-const fokusOutput = document.getElementById("fokusOutput");
+const englishInput=document.getElementById("englishInput");
+const fokusOutput=document.getElementById("fokusOutput");
 
-englishInput.addEventListener("input", function() {
-  if (lock) return;
-  lock = true;
-  fokusOutput.value = translate(this.value);
-  lock = false;
+englishInput.addEventListener("input",function(){
+  if(lock) return;
+  lock=true;
+  fokusOutput.value=translate(this.value);
+  lock=false;
 });
 
-fokusOutput.addEventListener("input", function() {
-  if (lock) return;
-  lock = true;
-  englishInput.value = reverseTranslate(this.value);
-  lock = false;
+fokusOutput.addEventListener("input",function(){
+  if(lock) return;
+  lock=true;
+  englishInput.value=reverseTranslate(this.value);
+  lock=false;
 });
 
 
 // ================= BUTTON =================
-function manualTranslate() {
-  fokusOutput.value = translate(englishInput.value);
+function manualTranslate(){
+  fokusOutput.value=translate(englishInput.value);
 }
 
 
 // ================= DICTIONARY BUTTON =================
-function toggleDictionary() {
+function toggleDictionary(){
+  const panel=document.getElementById("dictionaryPanel");
 
-  const panel = document.getElementById("dictionaryPanel");
-
-  if (!panel) return;
-
-  if (panel.style.display === "block") {
-    panel.style.display = "none";
+  if(panel.style.display==="block"){
+    panel.style.display="none";
     return;
   }
 
-  let html = "<h3>Dictionary</h3>";
-
-  for (const [eng, fok] of Object.entries(dictionary)) {
-    html += "<div>" + eng + " → " + fok + "</div>";
+  let html="<h3>Dictionary</h3>";
+  for(const [eng,fok] of Object.entries(dictionary)){
+    html+="<div>"+eng+" → "+fok+"</div>";
   }
 
-  panel.innerHTML = html;
-  panel.style.display = "block";
+  panel.innerHTML=html;
+  panel.style.display="block";
 }
 
 </script>
@@ -415,7 +394,8 @@ function toggleDictionary() {
 </body>
 </html>
 
-totally random text
+
+
 
 
 
