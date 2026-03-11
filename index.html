@@ -324,84 +324,133 @@ const dictionary = {
   "or":"priskar"
 };
 
-// ================= BUILD REVERSE =================
+// BUILD REVERSE DICTIONARY
 const reverseDictionary = {};
-for (const [eng,fok] of Object.entries(dictionary)) {
+
+for (const [eng, fok] of Object.entries(dictionary)) {
   reverseDictionary[fok.toLowerCase()] = eng;
 }
 
-
-// ================= TOKENIZER =================
-function tokenize(text){
+// TOKENIZER
+function tokenize(text) {
   return text.match(/\w+|\s+|[^\w\s]/g) || [];
 }
 
+// TRANSLATE FUNCTION
+function translate(text) {
 
-// ================= TRANSLATE =================
-function translate(text){
-  return tokenize(text)
-    .map(t => dictionary[t.toLowerCase()] || t)
-    .join("");
+  return tokenize(text).map(t => {
+
+    const lower = t.toLowerCase();
+
+    // DICTIONARY CHECK
+    if (dictionary[lower]) {
+
+      let word = dictionary[lower];
+
+      // PRESERVE CAPITAL LETTER
+      if (t[0] === t[0].toUpperCase()) {
+        word = word.charAt(0).toUpperCase() + word.slice(1);
+      }
+
+      return word;
+    }
+
+    // VERB + ING DETECTION
+    if (lower.endsWith("ing")) {
+
+      let root = lower.slice(0, -3);
+
+      // running -> run
+      if (root.length > 2) {
+        const last = root[root.length - 1];
+        const second = root[root.length - 2];
+
+        if (last === second) {
+          root = root.slice(0, -1);
+        }
+      }
+
+      // translate root verb
+      if (dictionary[root]) {
+        return dictionary[root] + "erk";
+      }
+
+      return root + "erk";
+    }
+
+    return t;
+
+  }).join("");
+
 }
 
+// REVERSE TRANSLATE
+function reverseTranslate(text) {
 
-// ================= REVERSE =================
-function reverseTranslate(text){
   return tokenize(text)
     .map(t => reverseDictionary[t.toLowerCase()] || t)
     .join("");
+
 }
 
+// EVENTS
+let lock = false;
 
-// ================= EVENTS =================
-let lock=false;
+const englishInput = document.getElementById("englishInput");
+const fokusOutput = document.getElementById("fokusOutput");
 
-const englishInput=document.getElementById("englishInput");
-const fokusOutput=document.getElementById("fokusOutput");
+englishInput.addEventListener("input", function () {
 
-englishInput.addEventListener("input",function(){
-  if(lock) return;
-  lock=true;
-  fokusOutput.value=translate(this.value);
-  lock=false;
+  if (lock) return;
+
+  lock = true;
+  fokusOutput.value = translate(this.value);
+  lock = false;
+
 });
 
-fokusOutput.addEventListener("input",function(){
-  if(lock) return;
-  lock=true;
-  englishInput.value=reverseTranslate(this.value);
-  lock=false;
+fokusOutput.addEventListener("input", function () {
+
+  if (lock) return;
+
+  lock = true;
+  englishInput.value = reverseTranslate(this.value);
+  lock = false;
+
 });
 
-
-// ================= BUTTON =================
-function manualTranslate(){
-  fokusOutput.value=translate(englishInput.value);
+// MANUAL TRANSLATE BUTTON
+function manualTranslate() {
+  fokusOutput.value = translate(englishInput.value);
 }
 
+// DICTIONARY PANEL
+function toggleDictionary() {
 
-// ================= DICTIONARY BUTTON =================
-function toggleDictionary(){
-  const panel=document.getElementById("dictionaryPanel");
+  const panel = document.getElementById("dictionaryPanel");
 
-  if(panel.style.display==="block"){
-    panel.style.display="none";
+  if (panel.style.display === "block") {
+    panel.style.display = "none";
     return;
   }
 
-  let html="<h3>Dictionary</h3>";
-  for(const [eng,fok] of Object.entries(dictionary)){
-    html+="<div>"+eng+" → "+fok+"</div>";
+  let html = "<h3>Dictionary</h3>";
+
+  for (const [eng, fok] of Object.entries(dictionary)) {
+    html += "<div>" + eng + " → " + fok + "</div>";
   }
 
-  panel.innerHTML=html;
-  panel.style.display="block";
+  panel.innerHTML = html;
+  panel.style.display = "block";
+
 }
 
 </script>
 
 </body>
 </html>
+
 
 
 
